@@ -92,6 +92,8 @@ struct _GESTimelineClass {
   void (*track_removed)	(GESTimeline *timeline, GESTrack * track);
   void (*layer_added)	(GESTimeline *timeline, GESLayer *layer);
   void (*layer_removed)	(GESTimeline *timeline, GESLayer *layer);
+  void (*group_added) (GESTimeline *timeline, GESGroup *group);
+  void (*group_removed) (GESTimeline *timeline, GESGroup *group, GPtrArray *children);
 
   /* Padding for API extension */
   gpointer _ges_reserved[GES_PADDING];
