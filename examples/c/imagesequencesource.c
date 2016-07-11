@@ -40,7 +40,7 @@ main (int argc, gchar ** argv)
     {"duration", 'd', 0, G_OPTION_ARG_INT, &duration,
         "duration to use from the file (in seconds, default:10s)", "seconds"},
     {"pattern-url", 'u', 0, G_OPTION_ARG_FILENAME, &filepattern,
-          "Pattern of the files. i.e. multifile:///foo/%04d.jpg",
+          "Pattern of the files. i.e. imagesequence:///foo/%04d.jpg",
         "pattern-url"},
     {NULL}
   };

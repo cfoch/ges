@@ -16,7 +16,7 @@ noinst_PROGRAMS = 	\
 	overlays	\
 	text_properties	\
 	assets \
-	multifilesrc \
+	imagesequencesource \
 	play_timeline_with_one_clip \
 	$(graphical)
 

@@ -1043,6 +1043,7 @@ ges_asset_request_async (GType extractable_type,
       g_type_name (extractable_type), id);
 
   real_id = _check_and_update_parameters (&extractable_type, id, &error);
+  GST_DEBUG ("Set ID to %s", real_id);
   if (error) {
     _unsure_material_for_wrong_id (id, extractable_type, error);
     real_id = g_strdup (id);

@@ -355,7 +355,26 @@ discoverer_discovered_cb (GstDiscoverer * discoverer,
   if (tags)
     gst_tag_list_foreach (tags, (GstTagForeachFunc) _set_meta_foreach, mfs);
 
-  if (gst_discoverer_info_get_result (info) == GST_DISCOVERER_OK) {
+  if (g_str_has_prefix (uri, GES_IMAGE_SEQUENCE_URI_PREFIX)) {
+    GESImageSequenceURI *uri_data;
+    GError *lerror = NULL;
+    gchar *first_file, *first_file_uri;
+
+    uri_data = ges_image_sequence_uri_new (uri);
+    first_file = g_strdup_printf (uri_data->location, uri_data->start);
+    first_file_uri = gst_filename_to_uri (first_file, &lerror);
+    info =
+        gst_discoverer_discover_uri (GES_URI_CLIP_ASSET_GET_CLASS
+        (mfs)->sync_discoverer, first_file_uri, &lerror);
+    GST_DEBUG ("Got imagesequence uri. Discovering first file %s",
+        first_file_uri);
+    g_free (uri_data);
+    g_free (first_file_uri);
+    g_free (first_file);
+  }
+
+  if (gst_discoverer_info_get_result (info) == GST_DISCOVERER_OK ||
+      g_str_has_prefix (uri, GES_IMAGE_SEQUENCE_URI_PREFIX)) {
     ges_uri_clip_asset_set_info (mfs, info);
   } else {
     if (err) {
@@ -470,7 +489,7 @@ ges_uri_clip_asset_new (const gchar * uri, GCancellable * cancellable,
 /**
  * ges_uri_clip_asset_request_sync:
  * @uri: The URI of the file for which to create a #GESUriClipAsset.
- * You can also use multi file uris for #GESMultiFileSource.
+ * You can also use image sequence file uris for #GESImageSequenceSource.
  * @error: (allow-none): An error to be set in case something wrong happens or %NULL
  *
  * Creates a #GESUriClipAsset for @uri syncronously. You should avoid
@@ -505,14 +524,15 @@ ges_uri_clip_asset_request_sync (const gchar * uri, GError ** error)
       "extractable-type", GES_TYPE_URI_CLIP, NULL);
   discoverer = GES_URI_CLIP_ASSET_GET_CLASS (asset)->sync_discoverer;
 
-  if (g_str_has_prefix (uri, GES_MULTI_FILE_URI_PREFIX)) {
-    GESMultiFileURI *uri_data;
+  if (g_str_has_prefix (uri, GES_IMAGE_SEQUENCE_URI_PREFIX)) {
+    GESImageSequenceURI *uri_data;
 
-    uri_data = ges_multi_file_uri_new (uri);
+    uri_data = ges_image_sequence_uri_new (uri);
     first_file = g_strdup_printf (uri_data->location, uri_data->start);
     first_file_uri = gst_filename_to_uri (first_file, &lerror);
     info = gst_discoverer_discover_uri (discoverer, first_file_uri, &lerror);
-    GST_DEBUG ("Got multifile uri. Discovering first file %s", first_file_uri);
+    GST_DEBUG ("Got imagesequence uri. Discovering first file %s",
+        first_file_uri);
     g_free (uri_data);
     g_free (first_file_uri);
     g_free (first_file);
@@ -616,8 +636,8 @@ _extract (GESAsset * asset, GError ** error)
 
   uri = g_strdup (priv->uri);
 
-  if (g_str_has_prefix (priv->uri, GES_MULTI_FILE_URI_PREFIX)) {
-    trackelement = GES_TRACK_ELEMENT (ges_multi_file_source_new (uri));
+  if (g_str_has_prefix (priv->uri, GES_IMAGE_SEQUENCE_URI_PREFIX)) {
+    trackelement = GES_TRACK_ELEMENT (ges_image_sequence_source_new (uri));
   } else if (GST_IS_DISCOVERER_VIDEO_INFO (priv->sinfo)
       && gst_discoverer_video_info_is_image ((GstDiscovererVideoInfo *)
           priv->sinfo))

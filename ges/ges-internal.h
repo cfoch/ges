@@ -375,16 +375,16 @@ G_GNUC_INTERNAL GESVideoTestSource * ges_video_test_source_new (void);
 G_GNUC_INTERNAL gdouble ges_timeline_element_get_media_duration_factor(GESTimelineElement *self);
 
 /******************************
- *  GESMultiFile internal API *
+ *  GESImageSequence internal API *
  ******************************/
-typedef struct GESMultiFileURI
+typedef struct GESImageSequenceURI
 {
   gchar *location;
   gint start;
   gint end;
-} GESMultiFileURI;
+} GESImageSequenceURI;
 
-G_GNUC_INTERNAL GESMultiFileURI * ges_multi_file_uri_new (const gchar * uri);
+G_GNUC_INTERNAL GESImageSequenceURI * ges_image_sequence_uri_new (const gchar * uri);
 
 /************************
  * Our property masks   *

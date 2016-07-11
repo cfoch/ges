@@ -44,7 +44,7 @@ libges_@GST_API_VERSION@_la_SOURCES = 		\
 	ges-video-uri-source.c			\
 	ges-audio-uri-source.c	\
 	ges-image-source.c		\
-	ges-multi-file-source.c		\
+	ges-image-sequence-source.c		\
 	ges-transition.c			\
 	ges-audio-transition.c		\
 	ges-video-transition.c		\
@@ -115,7 +115,7 @@ libges_@GST_API_VERSION@include_HEADERS = 	\
 	ges-video-uri-source.h			\
 	ges-audio-uri-source.h			\
 	ges-image-source.h		\
-	ges-multi-file-source.h		\
+	ges-image-sequence-source.h		\
 	ges-transition.h			\
 	ges-audio-transition.h		\
 	ges-video-transition.h		\

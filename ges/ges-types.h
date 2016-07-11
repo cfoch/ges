@@ -69,6 +69,9 @@ typedef struct _GESBaseTransitionClipClass GESBaseTransitionClipClass;
 typedef struct _GESTransitionClip GESTransitionClip;
 typedef struct _GESTransitionClipClass GESTransitionClipClass;
 
+typedef struct _GESImageSequenceClip GESImageSequenceClip;
+typedef struct _GESImageSequenceClipClass GESImageSequenceClipClass;
+
 typedef struct _GESTestClip GESTestClip;
 typedef struct _GESTestClipClass GESTestClipClass;
 
@@ -123,6 +126,9 @@ typedef struct _GESImageSourceClass GESImageSourceClass;
 typedef struct _GESMultiFileSource GESMultiFileSource;
 typedef struct _GESMultiFileSourceClass GESMultiFileSourceClass;
 
+typedef struct _GESImageSequenceSource GESImageSequenceSource;
+typedef struct _GESImageSequenceSourceClass GESImageSequenceSourceClass;
+
 typedef struct _GESTransition GESTransition;
 typedef struct _GESTransitionClass GESTransitionClass;
 
@@ -158,7 +164,8 @@ typedef struct _GESPitiviFormatterClass GESPitiviFormatterClass;
 
 typedef struct _GESAsset GESAsset;
 typedef struct _GESAssetClass GESAssetClass;
-
+typedef struct _GESImageSequenceSource GESImageSequenceSource;
+typedef struct _GESImageSequenceSourceClass GESImageSequenceSourceClass;
 typedef struct _GESClipAsset GESClipAsset;
 typedef struct _GESClipAssetClass GESClipAssetClass;
 
