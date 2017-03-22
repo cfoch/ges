@@ -158,9 +158,15 @@ AC_ARG_WITH([bash-completion-dir],
     [],
     [with_bash_completion_dir=yes])
 
+extra_args=
+if test "x$prefix" != "xNONE"
+then
+    extra_args="--define-variable=prefix=\"$prefix\""
+fi
+
 if test "x$with_bash_completion_dir" = "xyes"; then
     PKG_CHECK_MODULES([BASH_COMPLETION], [bash-completion >= 2.0],
-        [BASH_COMPLETION_DIR="`pkg-config --variable=completionsdir bash-completion`"],
+        [BASH_COMPLETION_DIR="`eval pkg-config $extra_args --variable=completionsdir bash-completion`"],
         [BASH_COMPLETION_DIR="$datadir/bash-completion/completions"])
 else
     BASH_COMPLETION_DIR="$with_bash_completion_dir"
