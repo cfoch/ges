@@ -2,6 +2,8 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@/gstreamer-@GST_API_VERSION@
+datarootdir=${prefix}/share
+datadir=${datarootdir}
 
 Name: gst-editing-services
 Description: GStreamer Editing Services
